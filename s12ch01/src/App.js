@@ -6,38 +6,38 @@ function App() {
 	const [distCurrency, setDistCurrency] = useState('USD');
 	const [inputValue, setInputValue] = useState('');
 	const [result, setResult] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(
 		function () {
-			const controller = new AbortController();
 			setResult('');
 			async function getConversion() {
 				try {
+					setIsLoading(true);
 					const res = await fetch(
 						`https://api.frankfurter.app/latest?amount=${inputValue}&from=${originCurrency}&to=${distCurrency}`,
-						{ signal: controller.signal },
 					);
 					if (!res.ok)
 						throw new Error(
 							`Something Went Wrong! code:${res.status}`,
 						);
 					const data = await res.json();
-					setResult(data.rates[`${distCurrency}`]);
+					setResult(data.rates[distCurrency]);
 				} catch (err) {
-					setResult(err.message);
+					if (err.name !== 'AbortError') setResult(err.message);
+				} finally {
+					setIsLoading(false);
 				}
 			}
-			if (
-				originCurrency === distCurrency ||
-				!inputValue ||
-				isNaN(inputValue)
-			)
+			if (originCurrency === distCurrency) {
+				setResult(inputValue);
 				return;
-			getConversion();
+			}
+			if (!inputValue) {
+				return;
+			}
 
-			return function () {
-				controller.abort();
-			};
+			getConversion();
 		},
 		[originCurrency, distCurrency, inputValue],
 	);
@@ -48,10 +48,12 @@ function App() {
 				type="text"
 				value={inputValue}
 				onChange={e => setInputValue(e.target.value)}
+				disabled={isLoading}
 			/>
 			<select
 				value={originCurrency}
 				onChange={e => setOriginCurrency(e.target.value)}
+				disabled={isLoading}
 			>
 				<option value="USD">USD</option>
 				<option value="EUR">EUR</option>
@@ -61,13 +63,16 @@ function App() {
 			<select
 				value={distCurrency}
 				onChange={e => setDistCurrency(e.target.value)}
+				disabled={isLoading}
 			>
 				<option value="USD">USD</option>
 				<option value="EUR">EUR</option>
 				<option value="CAD">CAD</option>
 				<option value="INR">INR</option>
 			</select>
-			<p>{result}</p>
+			<p>
+				{result} {inputValue && distCurrency}
+			</p>
 		</div>
 	);
 }
