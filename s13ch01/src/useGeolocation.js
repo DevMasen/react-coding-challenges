@@ -1,31 +1,27 @@
-import { useState, useEffect } from 'react';
-export function useGeolocation(countClicks) {
+import { useState } from 'react';
+export function useGeolocation() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [position, setPosition] = useState({});
 	const [error, setError] = useState(null);
 
-	useEffect(
-		function () {
-			if (!countClicks) return;
-			if (!navigator.geolocation)
-				return setError('Your browser does not support geolocation');
+	function getPosition() {
+		if (!navigator.geolocation)
+			return setError('Your browser does not support geolocation');
 
-			setIsLoading(true);
-			navigator.geolocation.getCurrentPosition(
-				pos => {
-					setPosition({
-						lat: pos.coords.latitude,
-						lng: pos.coords.longitude,
-					});
-					setIsLoading(false);
-				},
-				error => {
-					setError(error.message);
-					setIsLoading(false);
-				},
-			);
-		},
-		[countClicks],
-	);
-	return { position, isLoading, error };
+		setIsLoading(true);
+		navigator.geolocation.getCurrentPosition(
+			pos => {
+				setPosition({
+					lat: pos.coords.latitude,
+					lng: pos.coords.longitude,
+				});
+				setIsLoading(false);
+			},
+			error => {
+				setError(error.message);
+				setIsLoading(false);
+			},
+		);
+	}
+	return { position, isLoading, error, getPosition };
 }
