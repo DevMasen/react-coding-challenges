@@ -1,2 +1,3 @@
-# react-coding-challenges
-This is a repo for small react challenges represented on Ultimate React Course by Jonas Schmedtmann
+<h1 align="center"> React Coding Challenges 🧑‍💻</h1>
+
+# This repo created for practice reactJs coding with challenges represented in React Ultimate Course by `Jonas Schmedtmann`
