@@ -68,3 +68,37 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+# Get Start with Context API:
+
+## 1. The context has 3 important parts:
+
+### A. Provider
+
+### B. Value
+
+### C. Consumer Components
+
+## 2. We can create and use a provider like this:
+
+```jsx
+// 1.Create a Context Component
+const ContextName = createContext();
+
+function App(){
+    // Component Logic ...
+
+    // Provide Value to child Components
+    return (
+        <ContextName.Provider value={
+            key: value,
+        }>
+            <div className="app">
+                {/* Component View */}
+            </div>
+        </ContextName.Provider>
+    );
+}
+```
