@@ -102,3 +102,13 @@ function App(){
     );
 }
 ```
+
+## 3. We can use an advanced pattern of Context API :
+
+### A. Create a Custom Provider with children prop in NameContext.jsx.
+
+### B. Create a Custom Hook to handle context usage in NameContext.jsx.
+
+### C. Provide Value for child components with Custom Provider.
+
+### D. Use the Custom Provider Value with Custom Hook.
