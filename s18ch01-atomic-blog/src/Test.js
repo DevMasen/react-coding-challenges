@@ -14,7 +14,7 @@ function SlowComponent() {
 	);
 }
 
-export default function Test() {
+export function Counter() {
 	const [count, setCount] = useState(0);
 	return (
 		<div>
@@ -26,3 +26,11 @@ export default function Test() {
 		</div>
 	);
 }
+
+// export default function Test({ children }) {
+// 	return (
+// 		<Counter>
+// 			<SlowComponent />
+// 		</Counter>
+// 	);
+// }

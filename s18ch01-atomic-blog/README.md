@@ -112,3 +112,17 @@ function App(){
 ### C. Provide Value for child components with Custom Provider.
 
 ### D. Use the Custom Provider Value with Custom Hook.
+
+# Performance Oprimization Notes:
+
+## 1. 3 factors makes component instance re-render:
+
+### A. Context Change
+
+### B. State Updates
+
+### C. Parent re-render
+
+## 2. We can use the `Profiler` tab in react developer tools to observe the component re-renders during application changing states.
+
+## 3. The component rendered by children prop does not re-render on parent re-render
