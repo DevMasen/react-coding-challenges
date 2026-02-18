@@ -30,6 +30,15 @@ function Calculator({ workouts, allowSound }) {
 		[allowSound, duration],
 	);
 
+	useEffect(
+		function () {
+			// Get the previous value because of staled clousure
+			// console.log(duration, sets);
+			document.title = `Your ${number} workout Ecxercise`;
+		},
+		[number],
+	);
+
 	function handleInc() {
 		setDuration(duration => Math.floor(duration) + 1);
 	}
