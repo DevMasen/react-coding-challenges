@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { faker } from '@faker-js/faker';
 
 function createRandomPost() {
@@ -15,10 +15,15 @@ function App() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [isFakeDark, setIsFakeDark] = useState(false);
 
-	const archiveOptions = {
-		title: 'Archive Title',
-		show: false,
-	};
+	const archiveOptions = useMemo(
+		function () {
+			return {
+				title: `Archive Title | Posts: ${posts.length}`,
+				show: false,
+			};
+		},
+		[posts.length],
+	);
 
 	// Derived state. These are the posts that will actually be displayed
 	const searchedPosts =
