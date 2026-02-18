@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { faker } from '@faker-js/faker';
 import { PostProvider, usePosts } from './PostContext';
 
@@ -38,7 +38,7 @@ function App() {
 	);
 }
 
-function Header() {
+const Header = memo(function Header() {
 	// 3. Consume the Provider Value
 	const { onClearPosts } = usePosts();
 	return (
@@ -53,7 +53,7 @@ function Header() {
 			</div>
 		</header>
 	);
-}
+});
 
 function SearchPosts() {
 	const { searchQuery, setSearchQuery } = usePosts();
@@ -71,14 +71,14 @@ function Results() {
 	return <p>🚀 {posts.length} atomic posts found</p>;
 }
 
-function Main() {
+const Main = memo(function Main() {
 	return (
 		<main>
 			<FormAddPost />
 			<Posts />
 		</main>
 	);
-}
+});
 
 function Posts() {
 	return (

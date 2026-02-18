@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 import { faker } from '@faker-js/faker';
 
 // 1. Create a Context
@@ -33,19 +33,23 @@ function PostProvider({ children }) {
 	function handleClearPosts() {
 		setPosts([]);
 	}
-	return (
-		// 2. Pass value to the Context Provider
-		<PostContext.Provider
-			value={{
+
+	const value = useMemo(
+		function () {
+			return {
 				posts: searchedPosts,
 				onAddPost: handleAddPost,
 				onClearPosts: handleClearPosts,
 				searchQuery,
 				setSearchQuery,
-			}}
-		>
-			{children}
-		</PostContext.Provider>
+			};
+		},
+		[searchQuery, searchedPosts],
+	);
+
+	return (
+		// 2. Pass value to the Context Provider
+		<PostContext.Provider value={value}>{children}</PostContext.Provider>
 	);
 }
 function usePosts() {
