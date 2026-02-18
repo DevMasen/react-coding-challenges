@@ -1,4 +1,4 @@
-import { useState, memo, useEffect, useCallback } from 'react';
+import { useState, memo, useEffect } from 'react';
 import clickSound from './ClickSound.m4a';
 
 function Calculator({ workouts, allowSound }) {
