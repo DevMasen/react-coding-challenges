@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useTime } from './TimeContext';
 // import clickSound from './ClickSound.m4a';
 
@@ -88,4 +88,4 @@ function Calculator() {
 	);
 }
 
-export default Calculator;
+export default memo(Calculator);

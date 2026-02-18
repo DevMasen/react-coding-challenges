@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useTime } from './TimeContext';
 
 function ToggleSounds() {
@@ -12,4 +13,4 @@ function ToggleSounds() {
 	);
 }
 
-export default ToggleSounds;
+export default memo(ToggleSounds);
