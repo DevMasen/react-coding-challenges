@@ -126,3 +126,13 @@ function App(){
 ## 2. We can use the `Profiler` tab in react developer tools to observe the component re-renders during application changing states.
 
 ## 3. The component rendered by children prop does not re-render on parent re-render
+
+## 4. We can memo components for better performance, memo prevent component re-render when its parent re-renders
+
+```js
+import { memo } from 'react';
+const Component = memo(function Component(props) {
+	// Component Logic
+	return <element></element>;
+});
+```
