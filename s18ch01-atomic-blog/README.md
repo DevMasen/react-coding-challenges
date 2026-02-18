@@ -127,7 +127,7 @@ function App(){
 
 ## 3. The component rendered by children prop does not re-render on parent re-render
 
-## 4. We can memoize components for better performance, `memo` prevent component re-render when its parent re-renders
+## 4. We can memoize components for better performance, `memo` prevent component re-render when its parent re-renders:
 
 ```js
 import { memo } from 'react';
@@ -137,7 +137,7 @@ const Component = memo(function Component(props) {
 });
 ```
 
-## 5. If we want a value (even objects) stay the same between re-renders we can use `useMemo` hook
+## 5. If we want a value (even objects) stay the same between re-renders we can use `useMemo` hook:
 
 ```js
 const object = useMemo(function () {
@@ -145,4 +145,14 @@ const object = useMemo(function () {
 		key: value,
 	};
 }, []); //[] is dependency array of useMemo.
+```
+
+## 6. We can memoize functions with useCall back hook:
+
+### Note: memoization is not needed for useState setter functions! react do it behind the scenes.
+
+```js
+const func = useCallback(function func() {
+	// function Logic
+}, []);
 ```
